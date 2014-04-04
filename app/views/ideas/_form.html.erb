@@ -19,11 +19,37 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
+
+  <% if @idea.picture.present?%>
+  <%= image_tag(@idea.picture.url(:large)) if @idea.picture.present? %>
+  <p>
+    <label>
+      <%= f.check_box :remove_picture %>
+      Remove avatar
+    </label>
+  </p>
+  <% end %>
+  <div class="field picture">
     <%= f.label :picture %><br>
     <%= f.file_field :picture %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    $(document).ready(function() {
+      $('#idea_remove_picture').on('change', function(){
+        if ($('#idea_remove_picture').is(':checked')) {
+          $('.picture').hide();
+        }else {
+          $('.picture').show();
+        }
+      });
+
+    });
+  </script>
+
 <% end %>

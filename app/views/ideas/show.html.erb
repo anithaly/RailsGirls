@@ -12,7 +12,10 @@
 
 <p>
   <strong>Picture:</strong>
+  <%= image_tag(@idea.picture.url(:large)) if @idea.picture.present? %>
+  <!--
   <%= image_tag(@idea.picture_url, :width => 300) if @idea.picture.present? %>
+-->
 </p>
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
