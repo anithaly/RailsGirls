@@ -8,4 +8,6 @@ class Idea < ActiveRecord::Base
     },
     :presence => {:message => "Enter the idea"}
   validates :description, presence: true
+
+  has_many :ratings
 end

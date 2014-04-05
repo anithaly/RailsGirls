@@ -1,6 +1,8 @@
 Railsgirls::Application.routes.draw do
   get "pages/info"
-  resources :ideas
+  resources :ideas do
+    resources :ratings, only: [:create]
+  end
   # root :to => redirect('/ideas')
   root 'ideas#index'
 
