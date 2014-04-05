@@ -1,10 +1,21 @@
 Railsgirls::Application.routes.draw do
+
+  root 'ideas#index'
+  # root :to => redirect('/ideas')
+
   get "pages/info"
   resources :ideas do
+
     resources :ratings, only: [:create]
+
+    collection do
+      get 'pictures'
+      get 'uncategorized'
+    end
   end
-  # root :to => redirect('/ideas')
-  root 'ideas#index'
+
+
+  resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

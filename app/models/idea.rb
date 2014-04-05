@@ -10,4 +10,12 @@ class Idea < ActiveRecord::Base
   validates :description, presence: true
 
   has_many :ratings
+  belongs_to :category
+
+  default_scope :order => 'created_at DESC'
+  scope :uncategorized, -> { where(category_id: nil) }
+
+  def self.with_pictures
+    where.not(:picture => nil)
+  end
 end

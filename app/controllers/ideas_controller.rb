@@ -7,6 +7,18 @@ class IdeasController < ApplicationController
     @ideas = Idea.all
   end
 
+  # GET /ideas/pictures
+  def pictures
+    @ideas = Idea.with_pictures
+    render action: 'index'
+  end
+
+  # GET /ideas/uncategorized
+  def uncategorized
+    @ideas = Idea.uncategorized
+    render action: 'index'
+  end
+
   # GET /ideas/1
   # GET /ideas/1.json
   def show
@@ -70,6 +82,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:name, :description, :picture, :remove_picture)
+      params.require(:idea).permit(:name, :description, :picture, :remove_picture, :category_id)
     end
 end
