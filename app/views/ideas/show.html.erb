@@ -22,8 +22,8 @@
   <strong>Mark:</strong>
   <%= @idea.ratings.average(:mark) %>
 </p>
-
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<a href="/ideas/edit">Edit</a>
+<%= link_to 'Edit', edit_idea_path(@idea), :class => "btn btn-default" %> |
 <%= link_to 'Back', ideas_path %>
 
 <%= render 'ratings/rating_form' %>

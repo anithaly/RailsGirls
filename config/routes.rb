@@ -5,9 +5,7 @@ Railsgirls::Application.routes.draw do
 
   get "pages/info"
   resources :ideas do
-
     resources :ratings, only: [:create]
-
     collection do
       get 'pictures'
       get 'uncategorized'
