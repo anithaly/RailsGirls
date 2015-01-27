@@ -1,5 +1,7 @@
 Railsgirls::Application.routes.draw do
 
+  resources :tags
+
   root 'ideas#index'
   # root :to => redirect('/ideas')
 
