@@ -39,6 +39,16 @@
     <%= f.label :picture %><br>
     <%= f.file_field :picture %>
   </div>
+
+  <div>
+    <% Tag.all.each do |t| %>
+    <div>
+      <%= f.label t.name %>
+      <%= check_box_tag "tag_ids[]", t.id, @idea.tags.include?(t), :id => "tag_ids_#{t.id}" %>
+    </div>
+    <% end %>
+	</div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

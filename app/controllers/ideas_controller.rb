@@ -24,20 +24,24 @@ class IdeasController < ApplicationController
   def show
     @rating = Rating.new
   end
-
+  
   # GET /ideas/new
   def new
     @idea = Idea.new
-  end
-
-  # GET /ideas/1/edit
-  def edit
+    @tags = Tag.all
   end
 
   # POST /ideas
   # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
+    tags = Tag.find(params[:tag_ids])
+    @idea.tags = tags
+    
+    #params[:tag_ids].each do |id|
+    #  @idea.tags << Tag.find(id)
+    #end 
+    
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
@@ -48,10 +52,18 @@ class IdeasController < ApplicationController
       end
     end
   end
+  
+  # GET /ideas/1/edit
+  def edit
+  end
 
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
+    tags = Tag.where(:id => params[:tag_ids])
+    @idea.tags.destroy_all   #disassociate the already added organizers
+    @idea.tags << tags 
+    
     respond_to do |format|
       if @idea.update(idea_params)
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
@@ -81,6 +93,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:name, :description, :picture, :remove_picture, :category_id)
+      params.require(:idea).permit(:name, :description, :picture, :remove_picture, :category_id, :tag_ids)
     end
 end

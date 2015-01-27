@@ -10,6 +10,15 @@
   <%= @idea.description %>
 </p>
 
+<div>
+  <strong>Tags:</strong>
+  <% @idea.tags.each do |t| %>
+    <p>
+      <%= t.name %>
+    </p>
+  <% end %>
+</div>
+
 <p>
   <strong>Picture:</strong>
   <%= image_tag(@idea.picture.url(:large)) if @idea.picture.present? %>

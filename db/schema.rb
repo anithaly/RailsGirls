@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127114941) do
+ActiveRecord::Schema.define(version: 20150127122232) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20150127114941) do
   end
 
   add_index "ideas", ["category_id"], name: "index_ideas_on_category_id"
+
+  create_table "ideas_tags", id: false, force: true do |t|
+    t.integer "idea_id", null: false
+    t.integer "tag_id",  null: false
+  end
+
+  add_index "ideas_tags", ["idea_id", "tag_id"], name: "index_ideas_tags_on_idea_id_and_tag_id"
+  add_index "ideas_tags", ["tag_id", "idea_id"], name: "index_ideas_tags_on_tag_id_and_idea_id"
 
   create_table "ratings", force: true do |t|
     t.integer  "mark"
